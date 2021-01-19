@@ -5541,11 +5541,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Ayman\\OneDrive\\Desktop\\Projects\\LesJacksonAPI\\Commander\\Commander.csproj",
+      "projectUniqueName": "C:\\Users\\Ayman\\OneDrive\\Desktop\\Projects\\LesJacksonAPI\\Commander\\Commander.csproj",
       "projectName": "Commander",
-      "projectPath": "c:\\Users\\Ayman\\OneDrive\\Desktop\\Projects\\LesJacksonAPI\\Commander\\Commander.csproj",
+      "projectPath": "C:\\Users\\Ayman\\OneDrive\\Desktop\\Projects\\LesJacksonAPI\\Commander\\Commander.csproj",
       "packagesPath": "C:\\Users\\Ayman\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Ayman\\OneDrive\\Desktop\\Projects\\LesJacksonAPI\\Commander\\obj\\",
+      "outputPath": "C:\\Users\\Ayman\\OneDrive\\Desktop\\Projects\\LesJacksonAPI\\Commander\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Ayman\\AppData\\Roaming\\NuGet\\NuGet.Config",
