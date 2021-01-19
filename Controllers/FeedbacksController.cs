@@ -20,6 +20,7 @@ namespace Commander.Controllers
             _feedbackRepository = feedbackRepository;
         }
 
+        // GET api/feedbacks
         [HttpGet]
         public ActionResult<IEnumerable<Feedback>> GetAllFeedbacks()
         {
