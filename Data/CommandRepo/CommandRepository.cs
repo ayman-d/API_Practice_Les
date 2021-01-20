@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Commander.DataAccess;
+using Commander.DTOs.FeedbackDTOs;
 using Commander.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Commander.Data.CommandRepo
 {
@@ -11,14 +14,16 @@ namespace Commander.Data.CommandRepo
         // private fields
         private readonly CommanderContext _context;
         // constructor
-        public CommandRepository(CommanderContext context)
+        private readonly IMapper _mapper;
+        public CommandRepository(CommanderContext context, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
         }
 
         public IEnumerable<Command> GetAllCommands()
         {
-            var commands = _context.Commands.ToList();
+            var commands = _context.Commands.Include(c => c.Feedbacks).ToList();
             return commands;
         }
 

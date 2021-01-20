@@ -92,31 +92,31 @@ namespace Commander.Controllers
         }
 
         // PATCH api/commands/{id}
-        [HttpPatch("{id}")]
-        public ActionResult PatchCommand(int id, JsonPatchDocument<CommandUpdateDTO> patchDocument)
-        {
-            var patchedCommand = _commandRepository.GetCommandById(id);
-            if (patchedCommand != null)
-            {
-                var commandToPatch = _mapper.Map<CommandUpdateDTO>(patchedCommand);
-                patchDocument.ApplyTo(commandToPatch, ModelState);
-                if (!TryValidateModel(commandToPatch))
-                {
-                    return ValidationProblem(ModelState);
-                }
+        // [HttpPatch("{id}")]
+        // public ActionResult PatchCommand(int id, JsonPatchDocument<CommandUpdateDTO> patchDocument)
+        // {
+        //     var patchedCommand = _commandRepository.GetCommandById(id);
+        //     if (patchedCommand != null)
+        //     {
+        //         var commandToPatch = _mapper.Map<CommandUpdateDTO>(patchedCommand);
+        //         patchDocument.ApplyTo(commandToPatch, ModelState);
+        //         if (!TryValidateModel(commandToPatch))
+        //         {
+        //             return ValidationProblem(ModelState);
+        //         }
 
-                _mapper.Map(commandToPatch, patchedCommand);
+        //         _mapper.Map(commandToPatch, patchedCommand);
 
-                // Les says to include this but since we're not implementing it it didn't make sense for me to add it
-                //_commandRepository.UpdateCommand(editedCommand);
+        //         // Les says to include this but since we're not implementing it it didn't make sense for me to add it
+        //         //_commandRepository.UpdateCommand(editedCommand);
 
-                _commandRepository.SaveChanges();
+        //         _commandRepository.SaveChanges();
 
-                return NoContent();
-            }
+        //         return NoContent();
+        //     }
 
-            return NotFound();
-        }
+        //     return NotFound();
+        // }
 
         // DELETE api/commands/{id}
         [HttpDelete("{id}")]

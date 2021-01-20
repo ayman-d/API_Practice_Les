@@ -27,6 +27,7 @@ namespace Commander
             services.AddControllers().AddNewtonsoftJson(s =>
             {
                 s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                s.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
             services.AddDbContext<CommanderContext>(options => options.
                 UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
