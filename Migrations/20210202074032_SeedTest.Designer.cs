@@ -4,14 +4,16 @@ using Commander.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Commander.Migrations
 {
     [DbContext(typeof(CommanderContext))]
-    partial class CommanderContextModelSnapshot : ModelSnapshot
+    [Migration("20210202074032_SeedTest")]
+    partial class SeedTest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,46 +91,46 @@ namespace Commander.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cdeabdfb-bb4d-40cf-80e5-f79434f06279",
+                            Id = "7cce3ae0-11f1-45b5-ae12-96966f8875af",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3abd2db7-7e7f-4dbf-9b3b-9354cc3d301e",
+                            ConcurrencyStamp = "b70f5d9a-4143-4d15-8906-ef5fe6a556e1",
                             DisplayName = "BobTheSavage",
                             Email = "bob@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEGKuENybevdornjiDjEnA5pPmygbQgsmlIq1MU68R2iVeMSeXgl94Gm5Ic14asNlrQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFHyrylkEDuulYPaVyNCg6DEL79NWoLI+PzDOMWCEYDoZ3D9LP/sY7TGfUZvIGjsXA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "358e4168-f28d-4018-b50a-6f838940237a",
+                            SecurityStamp = "f704b867-ae1c-4ff4-b4c1-08bcfbb25dca",
                             TwoFactorEnabled = false,
                             UserName = "bob"
                         },
                         new
                         {
-                            Id = "ac05764f-cb61-452d-90ec-0671943e9d0c",
+                            Id = "b2f6132f-e85d-41f8-8f0c-ff77ea1da591",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dfb7f581-0a46-4f9d-bfa2-f6e299c6605f",
+                            ConcurrencyStamp = "58006cf5-162a-492e-a735-2eaa903e96fe",
                             DisplayName = "AndyTheKind",
                             Email = "andy@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEOtJGqT+RiaX/Yi2Z7KQHSgR/lKiiJfvv3+tZ2gCAebiMgDBui0SHQVi/EoyIwv1Yg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEebzD956/ilb48EqmnMEu2twszHAiwNry8ljQ38K0VME2MEX5H1USmU08mBbemTtA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dac1f99d-210c-4bd2-9ace-33d1721ac36e",
+                            SecurityStamp = "7ad53ad6-d3ef-4004-a886-110125e097f1",
                             TwoFactorEnabled = false,
                             UserName = "andy"
                         },
                         new
                         {
-                            Id = "669ce19d-0797-419a-8dd4-454a6f38658d",
+                            Id = "ae83a9b8-63c4-427b-aa69-14c6029a174f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5403df4b-63b1-4dea-8adb-af3f34e020e7",
+                            ConcurrencyStamp = "46f433b8-06be-4e6c-914d-ae836c553e35",
                             DisplayName = "GeorgeTheWise",
                             Email = "georige@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEMCZRapb+2k718UXP4VNp6puONW4ruXyL5e/rgRAiAYEZpCYtK9C2SknQ3gTD677yg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBdK1jFiPAlPsM7EZBjd2Xr+nhwmoGfqxrbyMBfyBMiKVCtjDWnGSnn4NRzD2dpvQA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d7c8f5bf-f98c-4ea4-a957-6014da4d62e0",
+                            SecurityStamp = "2b13eab9-d099-4cdb-97e1-5f3af4b09648",
                             TwoFactorEnabled = false,
                             UserName = "george"
                         });
