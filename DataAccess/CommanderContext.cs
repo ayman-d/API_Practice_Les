@@ -22,33 +22,33 @@ namespace Commander.DataAccess
         {
             base.OnModelCreating(builder);
 
-            var hasher = new PasswordHasher<IdentityUser>();
-
-            builder.Entity<ApplicationUser>().HasData(
-            new List<ApplicationUser>
-            {
-                new ApplicationUser
-                {
-                    DisplayName = "BobTheSavage",
-                    UserName = "bob",
-                    Email = "bob@gmail.com",
-                    PasswordHash = hasher.HashPassword(null, "Pa$$w0rd")
-                },
-                new ApplicationUser
-                {
-                    DisplayName = "AndyTheKind",
-                    UserName = "andy",
-                    Email = "andy@gmail.com",
-                    PasswordHash = hasher.HashPassword(null, "Pa$$w0rd")
-                },
-                new ApplicationUser
-                {
-                    DisplayName = "GeorgeTheWise",
-                    UserName = "george",
-                    Email = "georige@gmail.com",
-                    PasswordHash = hasher.HashPassword(null, "Pa$$w0rd")
-                }
-            });
+            // var hasher = new PasswordHasher<IdentityUser>();
+            //
+            // builder.Entity<ApplicationUser>().HasData(
+            // new List<ApplicationUser>
+            // {
+            //     new ApplicationUser
+            //     {
+            //         DisplayName = "BobTheSavage",
+            //         UserName = "bob",
+            //         Email = "bob@gmail.com",
+            //         PasswordHash = hasher.HashPassword(null, "Pa$$w0rd")
+            //     },
+            //     new ApplicationUser
+            //     {
+            //         DisplayName = "AndyTheKind",
+            //         UserName = "andy",
+            //         Email = "andy@gmail.com",
+            //         PasswordHash = hasher.HashPassword(null, "Pa$$w0rd")
+            //     },
+            //     new ApplicationUser
+            //     {
+            //         DisplayName = "GeorgeTheWise",
+            //         UserName = "george",
+            //         Email = "georige@gmail.com",
+            //         PasswordHash = hasher.HashPassword(null, "Pa$$w0rd")
+            //     }
+            // });
         }
     }
 }

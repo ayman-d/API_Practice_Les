@@ -19,21 +19,16 @@ namespace Commander.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IApplicationUserRepository _applicationUserRepository;
 
+
+        // do I even need UserManager and SignInManager here?? research
         public AuthController(UserManager<ApplicationUser> userManager,
-                              SignInManager<ApplicationUser> signInManager,
-                              IApplicationUserRepository applicationUserRepository)
+            SignInManager<ApplicationUser> signInManager,
+            IApplicationUserRepository applicationUserRepository)
         {
             _signInManager = signInManager;
             _applicationUserRepository = applicationUserRepository;
             _userManager = userManager;
         }
-
-        // [HttpGet]
-        // public async Task<ApplicationUser> GetUsers()
-        // {
-        //     var user = await _userManager.FindByEmailAsync("bob@gmail.com");
-        //     return user;
-        // }
 
         [HttpPost("login")]
         public async Task<ActionResult<UserResult>> Login(UserLoginDTO userLoginDTO)
@@ -52,31 +47,18 @@ namespace Commander.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<ApplicationUser>> Register(UserRegisterDTO userRegisterDTO)
+        public async Task<ActionResult<UserResult>> Register(UserRegisterDTO userRegisterDto)
         {
-            var user = await _userManager.FindByEmailAsync(userRegisterDTO.Email);
+            var result = await _applicationUserRepository.Register(userRegisterDto);
 
-            if (user != null)
+            if (!result.Successful)
             {
-                return BadRequest("Email already in use");
+                return BadRequest(result);
             }
 
-            ApplicationUser newUser = new ApplicationUser()
-            {
-                DisplayName = userRegisterDTO.UserName,
-                UserName = userRegisterDTO.UserName,
-                Email = userRegisterDTO.Email,
-                LockoutEnabled = false
-            };
-
-            var result = await _userManager.CreateAsync(newUser, userRegisterDTO.Password);
-
-            if (!result.Succeeded)
-            {
-                return BadRequest("Error creating new user");
-            }
-
-            return Ok(newUser);
+            return result;
         }
+
     }
+
 }

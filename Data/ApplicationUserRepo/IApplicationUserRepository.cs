@@ -9,7 +9,7 @@ namespace Commander.Data.ApplicationUserRepo
     {
 
         Task<UserResult> Login(UserLoginDTO userLoginDTO);
-        ApplicationUser Register(UserRegisterDTO userRegisterDTO);
-        
+        Task<UserResult> Register(UserRegisterDTO userRegisterDTO);
+
     }
 }

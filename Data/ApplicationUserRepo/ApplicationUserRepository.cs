@@ -16,13 +16,13 @@ namespace Commander.Data.ApplicationUserRepo
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public ApplicationUserRepository(UserManager<ApplicationUser> userManager, 
+        public ApplicationUserRepository(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        
+
         public async Task<UserResult> Login(UserLoginDTO userLoginDTO)
         {
             var user = await _userManager.FindByEmailAsync(userLoginDTO.Email);
@@ -65,9 +65,52 @@ namespace Commander.Data.ApplicationUserRepo
             };
         }
 
-        public ApplicationUser Register(UserRegisterDTO userRegisterDTO)
+        public async Task<UserResult> Register(UserRegisterDTO userRegisterDTO)
         {
-            throw new System.NotImplementedException();
+            var user = await _userManager.FindByEmailAsync(userRegisterDTO.Email);
+
+            if (user != null)
+            {
+                return new UserResult
+                {
+                    Username = null,
+                    Email = null,
+                    Successful = false,
+                    Message = "Email already in use, please try a different one",
+                    Token = null
+                };
+            }
+
+            ApplicationUser newUser = new ApplicationUser()
+            {
+                DisplayName = userRegisterDTO.UserName,
+                UserName = userRegisterDTO.UserName,
+                Email = userRegisterDTO.Email,
+                LockoutEnabled = false
+            };
+
+            var result = await _userManager.CreateAsync(newUser, userRegisterDTO.Password);
+
+            if (!result.Succeeded)
+            {
+                return new UserResult
+                {
+                    Username = null,
+                    Email = null,
+                    Successful = false,
+                    Message = $"Error creating new user: {result.Errors.ToString()}",
+                    Token = null
+                };
+            }
+
+            return new UserResult
+            {
+                Username = newUser.UserName,
+                Email = newUser.Email,
+                Successful = true,
+                Message = "User created successfully",
+                Token = null
+            };
         }
     }
 }

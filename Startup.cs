@@ -42,8 +42,6 @@ namespace Commander
             // Identity
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
                 options.Password.RequiredLength = 8;
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<CommanderContext>().AddDefaultTokenProviders();
