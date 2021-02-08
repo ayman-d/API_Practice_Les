@@ -1,12 +1,15 @@
+using System.Threading.Tasks;
 using Commander.DTOs.ApplicationUserDTOs;
 using Commander.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Commander.Data.ApplicationUserRepo
 {
     public interface IApplicationUserRepository
     {
-        bool SaveChanges();
 
-        ApplicationUser Login(UserLoginDTO userLoginDTO);
+        Task<UserResult> Login(UserLoginDTO userLoginDTO);
+        ApplicationUser Register(UserRegisterDTO userRegisterDTO);
+        
     }
 }

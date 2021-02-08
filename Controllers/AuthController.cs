@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Commander.Data.ApplicationUserRepo;
 using Commander.DataAccess;
 using Commander.DTOs.ApplicationUserDTOs;
 using Commander.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Update;
 
 namespace Commander.Controllers
 {
@@ -15,14 +17,14 @@ namespace Commander.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly CommanderContext _context;
+        private readonly IApplicationUserRepository _applicationUserRepository;
 
         public AuthController(UserManager<ApplicationUser> userManager,
                               SignInManager<ApplicationUser> signInManager,
-                              CommanderContext context)
+                              IApplicationUserRepository applicationUserRepository)
         {
-            _context = context;
             _signInManager = signInManager;
+            _applicationUserRepository = applicationUserRepository;
             _userManager = userManager;
         }
 
@@ -34,23 +36,19 @@ namespace Commander.Controllers
         // }
 
         [HttpPost("login")]
-        public async Task<ActionResult<ApplicationUser>> Login(UserLoginDTO userLoginDTO)
+        public async Task<ActionResult<UserResult>> Login(UserLoginDTO userLoginDTO)
         {
-            var user = await _userManager.FindByEmailAsync(userLoginDTO.Email);
+            // store the result from the repository
+            var result = await _applicationUserRepository.Login(userLoginDTO);
 
-            if (user != null)
+            // if not successful, send the object in an UnAuthorized 401 response
+            if (!result.Successful)
             {
-                var result = await _signInManager.CheckPasswordSignInAsync(user, userLoginDTO.Password, false);
-
-                if (result.Succeeded)
-                {
-                    return Ok(user);
-                }
-
-                return Unauthorized();
+                return Unauthorized(result);
             }
 
-            return NotFound();
+            // if successful send the object containing the token
+            return result;
         }
 
         [HttpPost("register")]

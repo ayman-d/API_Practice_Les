@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using AutoMapper;
+using Commander.Data.ApplicationUserRepo;
 using Commander.Data.CommandRepo;
 using Commander.Data.FeedbackRepo;
 using Commander.DataAccess;
@@ -73,6 +74,7 @@ namespace Commander
             // Repositories
             services.AddScoped<ICommandRepository, CommandRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+            services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
