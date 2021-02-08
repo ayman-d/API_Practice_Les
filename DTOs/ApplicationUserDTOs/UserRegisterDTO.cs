@@ -11,9 +11,13 @@ namespace Commander.DTOs.ApplicationUserDTOs
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "The email entered is not in the correct format")]
         public string Email { get; set; }
-        [PasswordPropertyText]
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "Password is required")]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", 
+            ErrorMessage = "Password must be at least 8 characters long and must " +
+                           "include at least 1 letter and 1 number")]
         public string Password { get; set; }
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "Confirm password is required")]
         [Compare("Password", ErrorMessage = "Password and confirm password do not match, please try again")]
         public string ConfirmPassword { get; set; }
