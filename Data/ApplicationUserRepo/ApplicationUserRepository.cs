@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Commander.DTOs.ApplicationUserDTOs;
+using Commander.Infrastructure;
 using Commander.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,12 +16,15 @@ namespace Commander.Data.ApplicationUserRepo
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IJwtGenerator _jwtGenerator;
 
         public ApplicationUserRepository(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            IJwtGenerator jwtGenerator)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _jwtGenerator = jwtGenerator;
         }
 
         public async Task<UserResult> Login(UserLoginDTO userLoginDTO)
@@ -51,7 +55,7 @@ namespace Commander.Data.ApplicationUserRepo
                     Email = user.Email,
                     Successful = true,
                     Message = "Login successful",
-                    Token = "Token will go here"
+                    Token = _jwtGenerator.CreateToken(user)
                 };
             }
 
@@ -77,6 +81,20 @@ namespace Commander.Data.ApplicationUserRepo
                     Email = null,
                     Successful = false,
                     Message = "Email already in use, please try a different one",
+                    Token = null
+                };
+            }
+
+            var userByName = await _userManager.FindByNameAsync(userRegisterDTO.UserName);
+
+            if (userByName != null)
+            {
+                return new UserResult
+                {
+                    Username = null,
+                    Email = null,
+                    Successful = false,
+                    Message = "Username already in use, please try a different one",
                     Token = null
                 };
             }

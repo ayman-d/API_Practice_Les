@@ -13,7 +13,7 @@ namespace Commander.DTOs.ApplicationUserDTOs
         public string Email { get; set; }
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Password is required")]
-        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", 
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$", 
             ErrorMessage = "Password must be at least 8 characters long and must " +
                            "include at least 1 letter and 1 number")]
         public string Password { get; set; }

@@ -5,6 +5,7 @@ using Commander.Data.ApplicationUserRepo;
 using Commander.Data.CommandRepo;
 using Commander.Data.FeedbackRepo;
 using Commander.DataAccess;
+using Commander.Infrastructure;
 using Commander.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -77,6 +78,7 @@ namespace Commander
             services.AddScoped<ICommandRepository, CommandRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            services.AddScoped<IJwtGenerator, JwtGenerator>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
