@@ -3,6 +3,7 @@ using AutoMapper;
 using Commander.Data.CommandRepo;
 using Commander.DTOs.CommandDTOs;
 using Commander.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,8 +25,11 @@ namespace Commander.Controllers
 
         // GET api/commands
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ActionResult<IEnumerable<CommandReadDTO>> GetAllCommands()
         {
+            // bool success;
+            // success = Request.Cookies.ContainsKey("X-Commander-Token");
             var commands = _commandRepository.GetAllCommands();
             return Ok(_mapper.Map<IEnumerable<CommandReadDTO>>(commands));
         }
