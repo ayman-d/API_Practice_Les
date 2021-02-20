@@ -46,35 +46,37 @@ namespace Commander.Controllers
             Response.Cookies.Append("X-Commander-Token", result.Token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
 
             // if successful send the object containing the token
-            return result;
+            return Ok(result);
         }
 
         [HttpPost("register")]
         public async Task<ActionResult<UserResult>> Register(UserRegisterDTO userRegisterDTO)
         {
-            var user = await _userManager.FindByEmailAsync(userRegisterDTO.Email);
+            var result = await _applicationUserRepository.Register(userRegisterDTO);
 
-            if (user != null)
+            if (!result.Successful)
             {
-                return BadRequest("Email already in use");
+                return BadRequest(result);
             }
 
-            ApplicationUser newUser = new ApplicationUser()
+            return Ok(result);
+        }
+
+        [HttpPost("logout")]
+        public ActionResult<UserResult> Logout()
+        {
+            Response.Cookies.Delete("X-Commander-Token");
+
+            var result = new UserResult
             {
-                DisplayName = userRegisterDTO.UserName,
-                UserName = userRegisterDTO.UserName,
-                Email = userRegisterDTO.Email,
-                LockoutEnabled = false
+                Username = null,
+                Email = null,
+                Successful = true,
+                Message = "User successfully logged out",
+                Token = null
             };
 
-            var result = await _userManager.CreateAsync(newUser, userRegisterDTO.Password);
-
-            if (!result.Succeeded)
-            {
-                return BadRequest("Error creating new user");
-            }
-
-            return Ok(newUser);
+            return Ok(result);
         }
     }
 }

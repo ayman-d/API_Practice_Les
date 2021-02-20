@@ -104,6 +104,7 @@ namespace Commander.Data.ApplicationUserRepo
                 DisplayName = userRegisterDTO.UserName,
                 UserName = userRegisterDTO.UserName,
                 Email = userRegisterDTO.Email,
+                Role = "User",
                 LockoutEnabled = false
             };
 
@@ -130,5 +131,6 @@ namespace Commander.Data.ApplicationUserRepo
                 Token = null
             };
         }
+
     }
 }
