@@ -16,21 +16,14 @@ namespace Commander.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IApplicationUserRepository _applicationUserRepository;
 
-
-        // do I even need UserManager and SignInManager here?? research
-        public AuthController(UserManager<ApplicationUser> userManager,
-                              SignInManager<ApplicationUser> signInManager,
-                              IApplicationUserRepository applicationUserRepository)
+        public AuthController(IApplicationUserRepository applicationUserRepository)
         {
-            _signInManager = signInManager;
             _applicationUserRepository = applicationUserRepository;
-            _userManager = userManager;
         }
 
+        // ============== login endpoint ==============
         [HttpPost("login")]
         public async Task<ActionResult<UserResult>> Login(UserLoginDTO userLoginDTO)
         {
@@ -49,6 +42,7 @@ namespace Commander.Controllers
             return Ok(result);
         }
 
+        // ============== register endpoint ==============
         [HttpPost("register")]
         public async Task<ActionResult<UserResult>> Register(UserRegisterDTO userRegisterDTO)
         {
@@ -62,6 +56,7 @@ namespace Commander.Controllers
             return Ok(result);
         }
 
+        // ============== logout endpoint ==============
         [HttpPost("logout")]
         public ActionResult<UserResult> Logout()
         {
