@@ -101,10 +101,8 @@ namespace Commander.Data.ApplicationUserRepo
 
             ApplicationUser newUser = new ApplicationUser()
             {
-                DisplayName = userRegisterDTO.UserName,
                 UserName = userRegisterDTO.UserName,
                 Email = userRegisterDTO.Email,
-                Role = "User",
                 LockoutEnabled = false
             };
 
