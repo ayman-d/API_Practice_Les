@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Commander.DataAccess;
 using Commander.DTOs.FeedbackDTOs;
@@ -27,9 +28,9 @@ namespace Commander.Data.CommandRepo
             return commands;
         }
 
-        public Command GetCommandById(int id)
+        public async Task<Command> GetCommandById(int id)
         {
-            var command = _context.Commands.FirstOrDefault(c => c.Id == id);
+            var command = await _context.Commands.FirstOrDefaultAsync(c => c.Id == id);
             return command;
         }
 

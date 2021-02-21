@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using Commander.Data.CommandRepo;
 using Commander.DTOs.CommandDTOs;
@@ -38,9 +39,9 @@ namespace Commander.Controllers
         // we give this method a name so we can use it elsewhere (in the create section to return the new object upon successful creation of items)
         [HttpGet("{id}", Name = "GetCommandById")]
         [Authorize]
-        public ActionResult<CommandReadDTO> GetCommandById(int id)
+        public async Task<ActionResult<CommandReadDTO>> GetCommandById(int id)
         {
-            var command = _commandRepository.GetCommandById(id);
+            var command = await _commandRepository.GetCommandById(id);
             if (command != null)
             {
                 return Ok(_mapper.Map<CommandReadDTO>(command));
@@ -125,9 +126,9 @@ namespace Commander.Controllers
 
         // DELETE api/commands/{id}
         [HttpDelete("{id}")]
-        public ActionResult DeleteCommand(int id)
+        public async Task<ActionResult> DeleteCommand(int id)
         {
-            var commandToDelete = _commandRepository.GetCommandById(id);
+            var commandToDelete = await _commandRepository.GetCommandById(id);
 
             if (commandToDelete != null)
             {
