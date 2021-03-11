@@ -31,7 +31,11 @@ namespace Commander.Controllers
                 return Unauthorized(result);
             }
 
-            Response.Cookies.Append("X-Commander-Token", result.Token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+
+
+            Response.Cookies.Append("X-Commander-Token", result.Token, new CookieOptions()
+            { HttpOnly = true, SameSite = SameSiteMode.Strict, Secure = false });
+
 
             // if successful send the object containing the token
             return Ok(result);

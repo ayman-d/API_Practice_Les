@@ -4,7 +4,9 @@ using AutoMapper;
 using Commander.Data.CommandRepo;
 using Commander.DTOs.CommandDTOs;
 using Commander.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,28 +28,31 @@ namespace Commander.Controllers
 
         // GET api/commands
         [HttpGet]
-        [Authorize(Roles = "Admin")]
-        public ActionResult<IEnumerable<CommandReadDTO>> GetAllCommands()
+        // [EnableCors("CorsPolicy")]
+        // [Authorize(Roles = "Admin")]
+        [Authorize]
+
+        public async Task<ActionResult<IEnumerable<CommandReadDTO>>> GetAllCommands()
         {
             // bool success;
             // success = Request.Cookies.ContainsKey("X-Commander-Token");
-            var commands = _commandRepository.GetAllCommands();
+            var commands = await _commandRepository.GetAllCommands();
             return Ok(_mapper.Map<IEnumerable<CommandReadDTO>>(commands));
         }
 
         // GET api/commands/{id}
         // we give this method a name so we can use it elsewhere (in the create section to return the new object upon successful creation of items)
         [HttpGet("{id}", Name = "GetCommandById")]
-        [Authorize]
+        // [Authorize]
         public async Task<ActionResult<CommandReadDTO>> GetCommandById(int id)
         {
             var command = await _commandRepository.GetCommandById(id);
-            if (command != null)
-            {
-                return Ok(_mapper.Map<CommandReadDTO>(command));
-            }
-
-            return NotFound();
+            return Ok(_mapper.Map<CommandReadDTO>(command));
+            // if (command != null)
+            // {
+            //     return Ok(_mapper.Map<CommandReadDTO>(command));
+            // }
+            // return NotFound();
         }
 
         // POST api/commands

@@ -22,9 +22,9 @@ namespace Commander.Data.CommandRepo
             _context = context;
         }
 
-        public IEnumerable<Command> GetAllCommands()
+        public async Task<IEnumerable<Command>> GetAllCommands()
         {
-            var commands = _context.Commands.Include(c => c.Feedbacks).ToList();
+            var commands = await _context.Commands.Include(c => c.Feedbacks).ToListAsync();
             return commands;
         }
 

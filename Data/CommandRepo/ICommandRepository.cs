@@ -7,7 +7,7 @@ namespace Commander.Data.CommandRepo
     public interface ICommandRepository
     {
         bool SaveChanges();
-        IEnumerable<Command> GetAllCommands();
+        Task<IEnumerable<Command>> GetAllCommands();
         Task<Command> GetCommandById(int id);
         void CreateCommand(Command command);
         void UpdateCommand(int id, Command command);
