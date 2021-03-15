@@ -28,7 +28,6 @@ namespace Commander.Controllers
 
         // GET api/commands
         [HttpGet]
-        // [EnableCors("CorsPolicy")]
         // [Authorize(Roles = "Admin")]
         [Authorize]
 

@@ -23,6 +23,10 @@ const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
+      <Link href="/">
+        <a>Home</a>
+      </Link>
+      <br />
       <Link href="/commands">
         <a>Commands</a>
       </Link>

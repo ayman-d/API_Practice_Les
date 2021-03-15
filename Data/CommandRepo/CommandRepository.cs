@@ -30,7 +30,7 @@ namespace Commander.Data.CommandRepo
 
         public async Task<Command> GetCommandById(int id)
         {
-            var command = await _context.Commands.FirstOrDefaultAsync(c => c.Id == id);
+            var command = await _context.Commands.Include(c => c.Feedbacks).FirstOrDefaultAsync(c => c.Id == id);
             return command;
         }
 

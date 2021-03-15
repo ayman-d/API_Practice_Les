@@ -22,22 +22,6 @@ const login = () => {
       .then((res) => console.log(res))
       .catch((err) => console.log(err.response));
   };
-  //   fetch("http://localhost:5000/api/auth/login", {
-  //     method: "POST",
-  //     // credentials: "same-origin",
-  //     keepalive: true,
-  //     mode: "cors",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       email: credentials.username,
-  //       password: credentials.password,
-  //     }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((result) => console.log(result));
-  // };
 
   return (
     <div>
