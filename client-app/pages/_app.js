@@ -12,6 +12,11 @@ axios.interceptors.response.use(
     if (error.response.status === 401) {
       window.location.href = "/auth/login";
     }
+
+    if (error.response.status === 403) {
+      window.location.href = "/auth/accessDenied";
+    }
+
     return error;
   }
 );

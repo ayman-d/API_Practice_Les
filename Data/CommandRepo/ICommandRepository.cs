@@ -6,11 +6,10 @@ namespace Commander.Data.CommandRepo
 {
     public interface ICommandRepository
     {
-        bool SaveChanges();
         Task<IEnumerable<Command>> GetAllCommands();
         Task<Command> GetCommandById(int id);
-        void CreateCommand(Command command);
-        void UpdateCommand(int id, Command command);
-        void DeleteCommand(Command command);
+        Task<bool> CreateCommand(Command command);
+        Task<bool> UpdateCommand(int id, Command command);
+        Task<bool> DeleteCommand(Command command);
     }
 }

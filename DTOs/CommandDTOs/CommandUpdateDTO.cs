@@ -10,6 +10,6 @@ namespace Commander.DTOs.CommandDTOs
         public string Line { get; set; }
         // [Required(ErrorMessage = "Platform Field is Required.")]
         // [StringLength(60, ErrorMessage = "Platform Field cannot be larger than 60 characters.")]
-        // public string Platform { get; set; }
+        public string Platform { get; set; }
     }
 }

@@ -34,19 +34,25 @@ namespace Commander.Data.CommandRepo
             return command;
         }
 
-        public void CreateCommand(Command command)
+        public async Task<bool> CreateCommand(Command command)
         {
             if (command == null)
             {
                 throw new ArgumentNullException(nameof(command));
             }
 
-            _context.Commands.Add(command);
+            await _context.Commands.AddAsync(command);
+            int itemsSaved = await _context.SaveChangesAsync();
+            if (itemsSaved <= 0)
+            {
+                return false;
+            }
+            return true;
         }
 
-        public void UpdateCommand(int id, Command command)
+        public async Task<bool> UpdateCommand(int id, Command command)
         {
-            var commandToEdit = _context.Commands.Find(id);
+            var commandToEdit = await _context.Commands.FindAsync(id);
 
             if (commandToEdit == null)
             {
@@ -55,11 +61,21 @@ namespace Commander.Data.CommandRepo
 
             commandToEdit.HowTo = command.HowTo ?? commandToEdit.HowTo;
             commandToEdit.Line = command.Line ?? commandToEdit.Line;
-            // commandToEdit.Platform = command.Platform ?? commandToEdit.Platform;
+            commandToEdit.Platform = command.Platform ?? commandToEdit.Platform;
             commandToEdit.LastModified = DateTime.UtcNow;
+
+            int itemsSaved = await _context.SaveChangesAsync();
+
+            if (itemsSaved <= 0)
+            {
+                return false;
+            }
+
+            return true;
+
         }
 
-        public void DeleteCommand(Command command)
+        public async Task<bool> DeleteCommand(Command command)
         {
             if (command == null)
             {
@@ -67,11 +83,14 @@ namespace Commander.Data.CommandRepo
             }
 
             _context.Commands.Remove(command);
-        }
+            int itemsSaved = await _context.SaveChangesAsync();
 
-        public bool SaveChanges()
-        {
-            return _context.SaveChanges() > 0;
+            if (itemsSaved <= 0)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
