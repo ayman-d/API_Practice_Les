@@ -1,0 +1,8 @@
+.container {
+  border: 1px solid #333;
+  background-color: #fffff2;
+  color: #333;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  text-align: center;
+}

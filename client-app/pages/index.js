@@ -10,6 +10,10 @@ const Home = () => {
       </Head>
       <main className={styles.main}>
         <h1>Hello</h1>
+        <p>
+          This is an app to share useful command lines accross multiple
+          platforms!
+        </p>
       </main>
     </div>
   );

@@ -1,15 +1,11 @@
 import React from "react";
-import Link from "next/link";
+import styles from "../styles/commands/command.module.css";
 
 const Command = ({ command }) => {
   return (
-    <div>
-      <Link href={`/commands/${command.id}`}>
-        <a>
-          <h3>{command.id}</h3>
-          <p>{command.line}</p>
-        </a>
-      </Link>
+    <div className={styles.container}>
+      <h3>{command.id}</h3>
+      <p>{command.line}</p>
     </div>
   );
 };

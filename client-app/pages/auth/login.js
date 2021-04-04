@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import styles from "../../styles/auth/login.module.css";
 
 const login = () => {
   const [credentials, setCredentials] = useState({
@@ -26,34 +27,42 @@ const login = () => {
   };
 
   return (
-    <div>
-      <h1>Login Page</h1>
-      <form method="post" onSubmit={onSubmit} id="loginForm">
+    <div className={styles.container}>
+      <h1 className={styles.h1}>Log In</h1>
+      <form method="POST" onSubmit={onSubmit} id="loginForm">
         <div>
-          <label htmlFor="username">Username</label>
+          <label className={styles.label} htmlFor="username">
+            Username
+          </label>
           <input
+            className={styles.input}
             onChange={onChange}
             type="text"
             name="username"
             // required
-            placeholder="username"
+            placeholder="Username"
             value={credentials.username}
           ></input>
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label className={styles.label} htmlFor="password">
+            Password
+          </label>
           <input
+            className={styles.input}
             value={credentials.password}
             onChange={onChange}
             type="password"
             name="password"
             // required
-            placeholder="password"
+            placeholder="Password"
             value={credentials.password}
           ></input>
         </div>
         <div>
-          <button type="submit">Login</button>
+          <button className={styles.button} type="submit">
+            Login
+          </button>
         </div>
       </form>
     </div>

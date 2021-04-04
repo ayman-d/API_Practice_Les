@@ -1,9 +1,8 @@
 import "../styles/globals.css";
-import { QueryClient, QueryClientProvider } from "react-query";
 import Link from "next/link";
 import axios from "axios";
 
-// DONT FORGET THESE EVERRRRRRRRRRRRRR
+// DONT FORGET THESE axios interceptors
 axios.interceptors.response.use(
   (response) => {
     return response;
@@ -21,13 +20,13 @@ axios.interceptors.response.use(
   }
 );
 
+// this is needed for the cookie
 axios.defaults.withCredentials = true;
-
-const queryClient = new QueryClient();
+// end of axios interceptors
 
 function MyApp({ Component, pageProps }) {
   return (
-    <QueryClientProvider client={queryClient}>
+    <div>
       <Link href="/">
         <a>Home</a>
       </Link>
@@ -40,7 +39,7 @@ function MyApp({ Component, pageProps }) {
         <a>Login</a>
       </Link>
       <Component {...pageProps} />
-    </QueryClientProvider>
+    </div>
   );
 }
 
